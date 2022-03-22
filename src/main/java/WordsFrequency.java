@@ -8,8 +8,7 @@ import java.util.regex.Pattern;
 
 public class WordsFrequency {
 
-    // метод, разбивающий строку на список слов
-    static ArrayList<String> wordsFromString (String  string) {
+    static ArrayList<String> getWordsFromString(String  string) {
         ArrayList<String> wordsList = new ArrayList<>();
         Pattern pattern = Pattern.compile("\\S+");
         Matcher matcher = pattern.matcher(string);
@@ -19,8 +18,7 @@ public class WordsFrequency {
         return wordsList;
     }
 
-    // метод, подсчитывающий частоту встречания слова
-    public static Integer countFreq(ArrayList<String>  wordsList, String word) {
+    public static Integer countWordsFrequency(ArrayList<String>  wordsList, String word) {
         Integer count =0;
         for (String w : wordsList) {
             if (w.equalsIgnoreCase(word)) {count++;}
@@ -29,16 +27,12 @@ public class WordsFrequency {
     }
 
     public static void main(String[] args) throws IOException {
-        File f = new File("src\\main\\java\\test.txt");
-        f.createNewFile();
-
-        // получаем из файла строку, преобразовываем ее в список слов и построчно заливаем в общий список слов
 
         ArrayList<String> wordsList = new ArrayList<>();
-        try ( BufferedReader reader = new BufferedReader(new FileReader("src\\main\\java\\test.txt") ) ) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader("./src/main/resources/test.txt") ) ) {
             String line = reader.readLine();
             while ( line != null) {
-                ArrayList<String> wordsFromLine = wordsFromString(line);
+                ArrayList<String> wordsFromLine = getWordsFromString(line);
                 Iterator<String> iterator = wordsFromLine.iterator();
                 while (iterator.hasNext()) {
                     wordsList.add(iterator.next());
@@ -50,14 +44,12 @@ public class WordsFrequency {
             System.out.println(e.getMessage());
         }
 
-           // определяем частоту повторения этого слова и формируем HashMap
-            HashMap<String , Integer>  wordFrequency = new HashMap<>();
+        HashMap<String , Integer>  wordFrequency = new HashMap<>();
             for ( String w : wordsList) {
-                wordFrequency.put(w,countFreq(wordsList, w));
+                wordFrequency.put(w, countWordsFrequency(wordsList, w));
             }
             System.out.println(wordFrequency.toString());
 
-            // сотрируем HashMap по значению
         ArrayList <Map.Entry<String, Integer >> valuesList = new ArrayList(wordFrequency.entrySet());
         Collections.sort(valuesList, new Comparator<Map.Entry<String, Integer >>() {
             @Override

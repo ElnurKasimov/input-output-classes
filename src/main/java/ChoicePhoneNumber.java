@@ -16,7 +16,7 @@ public class ChoicePhoneNumber {
     }
 
     public static void main(String[] args) throws IOException {
-        try ( BufferedReader reader = new BufferedReader(new FileReader("F:\\IdeaProjects\\InputOutputStreams\\src\\main\\java\\ChoicePhoneNumber.txt") ) ) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader("./src/main/resources/ChoicePhoneNumber.txt") ) ) {
             String line = reader.readLine();
             while (line != null) {
                 if ( isNumberWithCode(line)  ||  isNumberWithoutCode(line)) {

@@ -4,12 +4,12 @@ import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.util.ArrayList;
 
-public class CreatingJsonFile {
+public class JsonFileCreator {
 
     public static void main(String[] args) throws IOException {
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String > ages = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("F:\\IdeaProjects\\InputOutputStreams\\src\\main\\java\\UsersInformation.txt")) ) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("./src/main/resources/UsersInformation.txt")) ) {
             String line = reader.readLine();
             while (line != null) {
                 String[] user = line.split(" ");
@@ -23,9 +23,9 @@ public class CreatingJsonFile {
         System.out.println(user1);
         System.out.println(user2);
 
-        File jsonFile = new File("F:\\IdeaProjects\\InputOutputStreams\\src\\main\\java\\Users.json");
+        File jsonFile = new File("./src/main/resources/Users.json");
         jsonFile.createNewFile();
-        try (FileWriter writer = new FileWriter("F:\\IdeaProjects\\InputOutputStreams\\src\\main\\java\\Users.json")) {
+        try (FileWriter writer = new FileWriter("./src/main/resources/Users.json")) {
         Gson gson = new GsonBuilder(). setPrettyPrinting().create();
         writer.write("[\n");
         writer.write(gson.toJson(user1) + ", \n");
